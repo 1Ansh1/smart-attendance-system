@@ -5,8 +5,12 @@ from fastapi.openapi.utils import get_openapi
 from app.api.routes_auth import router as auth_router
 from app.api.routes_students import router as students_router
 from app.api.routes_attendance import router as attendance_router
+from app.api.routes_faces import router as faces_router
+from app.api.routes_attendance import router as attendance_router
 
 app = FastAPI(title="Smart Attendance API")
+app.include_router(faces_router)
+app.include_router(attendance_router)
 
 def custom_openapi():
     if app.openapi_schema:
