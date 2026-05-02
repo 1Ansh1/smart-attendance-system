@@ -5,7 +5,7 @@ from datetime import datetime
 
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from app.db.session import get_db
 from app.models.student_face import StudentFace
@@ -65,4 +65,58 @@ async def mark_attendance(
     return {
         "message": "Attendance marked",
         "student_id": matched_face.student_id
+    }
+
+@router.get("")
+async def get_attendance(
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(select(Attendance))
+    records = result.scalars().all()
+
+    return records
+
+from fastapi import Query
+from datetime import date
+
+@router.get("/by-date")
+async def get_by_date(
+    date_param: date = Query(...),
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(
+        select(Attendance).where(Attendance.date == date_param)
+    )
+    records = result.scalars().all()
+
+    return records
+
+
+@router.get("/by-student/{student_id}")
+async def get_by_student(
+    student_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(
+        select(Attendance).where(Attendance.student_id == student_id)
+    )
+    records = result.scalars().all()
+
+    return records
+
+from sqlalchemy import func
+
+@router.get("/report/{student_id}")
+async def student_report(
+    student_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(
+        select(func.count()).where(Attendance.student_id == student_id)
+    )
+    total_present = result.scalar()
+
+    return {
+        "student_id": student_id,
+        "total_present": total_present
     }
