@@ -52,6 +52,23 @@ async def mark_attendance(
 
     matched_face = faces[match_index]
 
+    from datetime import date
+
+    today = date.today()
+
+    existing = await db.execute(
+        select(Attendance).where(
+            Attendance.student_id == matched_face.student_id,
+            Attendance.date == today
+        )
+    )
+
+    if existing.scalar_one_or_none():
+        return {
+            "message": "Attendance already marked today",
+            "student_id": matched_face.student_id
+        }
+
     # 5. Save attendance
     attendance = Attendance(
         student_id=matched_face.student_id,
