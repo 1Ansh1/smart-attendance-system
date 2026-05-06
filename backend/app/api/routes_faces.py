@@ -19,20 +19,20 @@ async def upload_face(
     file: UploadFile = File(...),
     db: AsyncSession = Depends(get_db),
 ):
-    # save file
+   
     unique_name = f"{uuid.uuid4()}_{file.filename}"
     file_path = os.path.join(UPLOAD_DIR, unique_name)
 
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    # extract embedding
+   
     embedding = get_face_embedding(file_path)
 
     if embedding is None:
         raise HTTPException(status_code=400, detail="No face detected")
 
-    # store in DB
+   
     face = StudentFace(
         student_id=student_id,
         image_path=file_path,

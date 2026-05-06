@@ -78,7 +78,7 @@ export default function Camera() {
   return (
     <AppShell title="Mark Attendance">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Camera panel */}
+       
         <div className="lg:col-span-2 rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -128,7 +128,7 @@ export default function Camera() {
           )}
         </div>
 
-        {/* Tips panel */}
+       
         <div className="rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
           <div className="text-sm text-zinc-400">Tips</div>
           <div className="mt-2 space-y-3 text-sm text-zinc-300">

@@ -37,7 +37,7 @@ export default function Dashboard() {
   return (
     <AppShell title="Dashboard">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left */}
+       
         <div className="lg:col-span-2 space-y-4">
           <div className="rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
             <div className="flex items-start justify-between gap-3">
@@ -66,7 +66,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* List */}
+        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {loading ? (
               <>
@@ -126,7 +126,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Right */}
+       
         <div className="space-y-4">
           <div className="rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
             <div className="text-sm text-zinc-400">Summary</div>

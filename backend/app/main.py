@@ -9,22 +9,22 @@ from app.api.routes_faces import router as faces_router
 
 app = FastAPI(title="Smart Attendance API")
 
-# ✅ CORRECT CORS (ONLY ONCE)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React frontend
+    allow_origins=["http://localhost:3000"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ✅ ROUTES
+
 app.include_router(auth_router)
 app.include_router(students_router)
 app.include_router(attendance_router)
 app.include_router(faces_router)
 
-# ✅ OpenAPI config
+
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema

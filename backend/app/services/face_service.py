@@ -33,7 +33,7 @@ def find_best_match(known_embeddings, test_embedding):
 
     best_match_index = np.argmin(distances)
 
-    # threshold
+    
     if distances[best_match_index] < 0.5:
         return best_match_index
 

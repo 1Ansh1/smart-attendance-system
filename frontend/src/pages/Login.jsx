@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center px-4">
-      {/* background glow */}
+     
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-indigo-600/20 blur-3xl" />
         <div className="absolute top-24 right-0 h-80 w-80 rounded-full bg-fuchsia-600/10 blur-3xl" />

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* App background + better defaults */
+
 :root {
   color-scheme: dark;
 }
@@ -11,12 +11,12 @@ html, body, #root {
   height: 100%;
 }
 
-/* Smooth fonts */
+
 body {
   @apply bg-zinc-950 text-zinc-100 antialiased;
 }
 
-/* Nice scrollbar */
+
 ::-webkit-scrollbar {
   width: 10px;
 }

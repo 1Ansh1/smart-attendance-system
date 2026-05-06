@@ -4,7 +4,7 @@ from jose import jwt
 
 from app.core.config import settings
 
-# Use pbkdf2_sha256 (stable on Windows, no bcrypt 72-byte issue)
+
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 def hash_password(password: str) -> str:

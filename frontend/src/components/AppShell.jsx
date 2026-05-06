@@ -26,7 +26,7 @@ export default function AppShell({ title, children }) {
 
   return (
     <div className="min-h-screen bg-zinc-950">
-      {/* Background glow */}
+      
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-indigo-600/20 blur-3xl" />
         <div className="absolute top-24 right-0 h-72 w-72 rounded-full bg-fuchsia-600/10 blur-3xl" />
@@ -34,7 +34,7 @@ export default function AppShell({ title, children }) {
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl">
-        {/* Sidebar */}
+       
         <aside className="hidden md:flex w-64 flex-col border-r border-white/10 bg-zinc-950/60 backdrop-blur px-4 py-6">
           <div className="mb-6">
             <div className="text-lg font-semibold tracking-tight">Smart Attendance</div>
@@ -57,9 +57,9 @@ export default function AppShell({ title, children }) {
           </div>
         </aside>
 
-        {/* Main */}
+        
         <main className="flex-1">
-          {/* Topbar */}
+         
           <div className="sticky top-0 z-10 border-b border-white/10 bg-zinc-950/60 backdrop-blur">
             <div className="flex items-center justify-between px-4 md:px-8 py-4">
               <div>

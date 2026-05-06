@@ -3,7 +3,7 @@ import api from "../api/client";
 import AppShell from "../components/AppShell";
 
 export default function RegisterStudent() {
-  // student form
+ 
   const [form, setForm] = useState({
     name: "",
     roll_number: "",
@@ -11,13 +11,13 @@ export default function RegisterStudent() {
     section: "",
   });
 
-  // camera + captures
+
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [cameraOn, setCameraOn] = useState(false);
-  const [captures, setCaptures] = useState([]); // [{ blob, previewUrl }]
+  const [captures, setCaptures] = useState([]); 
 
-  // ui state
+ 
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState({ type: "idle", text: "" });
 
@@ -79,7 +79,7 @@ export default function RegisterStudent() {
   const removeCapture = (idx) => {
     setCaptures((prev) => {
       const copy = [...prev];
-      // cleanup object url
+     
       URL.revokeObjectURL(copy[idx].previewUrl);
       copy.splice(idx, 1);
       return copy;
@@ -106,11 +106,11 @@ export default function RegisterStudent() {
     setStatus({ type: "idle", text: "" });
 
     try {
-      // 1) Create student
+     
       const studentRes = await api.post("/students", form);
       const studentId = studentRes.data.id;
 
-      // 2) Upload each captured photo as multipart to /faces/{studentId}
+     
       for (let i = 0; i < captures.length; i++) {
         const fd = new FormData();
         fd.append("file", captures[i].blob, `face_${studentId}_${i + 1}.jpg`);
@@ -122,10 +122,9 @@ export default function RegisterStudent() {
         text: `Student registered successfully (ID: ${studentId}). Faces uploaded: ${captures.length}`,
       });
 
-      // optional: stop camera after success
+      
       stopCamera();
-      // keep data for now; or reset
-      // resetAll();
+      
     } catch (e) {
       setStatus({ type: "error", text: "Registration failed. Check backend logs." });
     } finally {
@@ -136,7 +135,7 @@ export default function RegisterStudent() {
   return (
     <AppShell title="Register Student">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Form */}
+        
         <div className="rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
           <div className="text-sm text-zinc-400">Student details</div>
           <div className="mt-1 text-xl font-semibold tracking-tight">Create student record</div>
@@ -198,7 +197,7 @@ export default function RegisterStudent() {
           </div>
         </div>
 
-        {/* Camera */}
+        
         <div className="lg:col-span-2 rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -239,7 +238,7 @@ export default function RegisterStudent() {
 
           <canvas ref={canvasRef} className="hidden" />
 
-          {/* Captures */}
+         
           <div className="mt-5">
             <div className="flex items-center justify-between">
               <div className="text-sm text-zinc-400">

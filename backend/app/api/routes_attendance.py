@@ -22,20 +22,20 @@ async def mark_attendance(
     file: UploadFile = File(...),
     db: AsyncSession = Depends(get_db),
 ):
-    # 1. Save temp image
+   
     os.makedirs(UPLOAD_DIR, exist_ok=True)
     file_path = os.path.join(UPLOAD_DIR, f"{uuid.uuid4()}_{file.filename}")
 
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    # 2. Extract embedding
+    
     test_embedding = get_face_embedding(file_path)
 
     if test_embedding is None:
         raise HTTPException(status_code=400, detail="No face detected")
 
-    # 3. Get all stored faces
+    
     result = await db.execute(select(StudentFace))
     faces = result.scalars().all()
 
@@ -44,7 +44,7 @@ async def mark_attendance(
 
     embeddings = [json.loads(f.embedding) for f in faces]
 
-    # 4. Find match
+   
     match_index = find_best_match(embeddings, test_embedding)
 
     if match_index is None:
@@ -69,7 +69,7 @@ async def mark_attendance(
             "student_id": matched_face.student_id
         }
 
-    # 5. Save attendance
+   
     attendance = Attendance(
         student_id=matched_face.student_id,
         date=datetime.now(),
